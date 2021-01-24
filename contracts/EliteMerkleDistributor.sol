@@ -3,9 +3,9 @@ pragma solidity =0.6.11;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/cryptography/MerkleProof.sol";
-import "./interfaces/IMerkleDistributor.sol";
+import "./interfaces/IEliteMerkleDistributor.sol";
 
-contract MerkleDistributor is IMerkleDistributor {
+contract EliteMerkleDistributor is IEliteMerkleDistributor {
     address public immutable override token;
     bytes32 public immutable override merkleRoot;
 
@@ -32,15 +32,15 @@ contract MerkleDistributor is IMerkleDistributor {
     }
 
     function claim(uint256 index, address account, uint256 amount, bytes32[] calldata merkleProof) external override {
-        require(!isClaimed(index), 'MerkleDistributor: Drop already claimed.');
+        require(!isClaimed(index), 'EliteMerkleDistributor: Drop already claimed.');
 
         // Verify the merkle proof.
         bytes32 node = keccak256(abi.encodePacked(index, account, amount));
-        require(MerkleProof.verify(merkleProof, merkleRoot, node), 'MerkleDistributor: Invalid proof.');
+        require(MerkleProof.verify(merkleProof, merkleRoot, node), 'EliteMerkleDistributor: Invalid proof.');
 
         // Mark it claimed and send the token.
         _setClaimed(index);
-        require(IERC20(token).transfer(account, amount), 'MerkleDistributor: Transfer failed.');
+        require(IERC20(token).transfer(account, amount), 'EliteMerkleDistributor: Transfer failed.');
 
         emit Claimed(index, account, amount);
     }

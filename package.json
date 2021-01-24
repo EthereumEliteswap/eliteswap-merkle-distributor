@@ -1,18 +1,17 @@
 {
-  "name": "@uniswap/merkle-distributor",
+  "name": "@eliteswap/eliteswap-merkle-distributor",
   "author": {
-    "name": "Moody Salem"
   },
   "description": "📦 A smart contract that distributes a balance of tokens according to a merkle root",
   "version": "1.0.1",
-  "homepage": "https://uniswap.org",
+  "homepage": "https://eliteswap.io",
   "keywords": [
-    "uniswap",
+    "eliteswap",
     "erc20"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Uniswap/merkle-distributor"
+    "url": "https://github.com/EthereumEliteswap/eliteswap-merkle-distributor"
   },
   "files": [
     "build"
